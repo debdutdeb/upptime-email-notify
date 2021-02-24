@@ -12,6 +12,7 @@ services:
             - NOTIFICATION_EMAIL_FROM
             - NOTIFICATION_EMAIL_TO
             - GITHUB_SECRET
+            - ENDPOINT
             - VIRTUAL_HOST
             - LETSENCRYPT_HOST
         networks: [net]
