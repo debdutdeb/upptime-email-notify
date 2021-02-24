@@ -12,8 +12,6 @@ func getEnv(vari string) (val string) {
 	var e bool
 	if val, e = os.LookupEnv(vari); !e {
 		log.Fatal("Environment variable " + vari + " is not set.")
-	} else {
-		return
 	}
 	return
 }
@@ -54,8 +52,8 @@ func sendMails(subject, body string) error {
 
 	log.Debug("NOTIFICATION_EMAIL_SMTP_USERNAME: " + user + "\n" +
 		"NOTIFICATION_EMAIL_SMTP_PASSWORD: " + password + "\n" +
-		"NOTIFICATION_EMAIL_HOST: " + host + "\n" +
-		"NOTIFICATION_EMAIL_PORT: " + port + "\n" +
+		"NOTIFICATION_EMAIL_SMTP_HOST: " + host + "\n" +
+		"NOTIFICATION_EMAIL_SMTP_PORT: " + port + "\n" +
 		"NOTIFICATION_EMAIL_FROM: " + from + "\n" +
 		"NOTIFICATION_EMAIL_TO: " + strings.Join(to, " "))
 
