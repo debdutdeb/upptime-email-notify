@@ -65,6 +65,8 @@ func handler(rw http.ResponseWriter, rq *http.Request) {
 	}
 	log.Info("Signatures matched.")
 
+	// To understand the following line better
+	// https://stackoverflow.com/a/48728155
 	var objmap map[string]interface{}
 	if err = json.Unmarshal(data, &objmap); err != nil {
 		log.Fatal(err)
