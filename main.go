@@ -74,13 +74,16 @@ func handler(rw http.ResponseWriter, rq *http.Request) {
 
 	go func() {
 		notification := objmap["issue"].(map[string]interface{})["title"].(string)
-		re := regexp.MustCompile(`In \[\W(.+)\W\]\((.+)\n\).+`)
-		matches := re.FindStringSubmatch(
+
+		matches := regexp.MustCompile(
+			`In \[\W(.+)\W\]\((.+)\n\).+`).FindStringSubmatch(
 			objmap["issue"].(map[string]interface{})["body"].(string))
+
 		body := "<ul>" +
 			"<li><a href=" + matches[2] + ">Commit <code>" + matches[1] + "</code></a></li>" +
 			"<li><a href=" + objmap["issue"].(map[string]interface{})["html_url"].(string) + ">Issue</a></li>" +
 			"</ul>"
+
 		if err = sendMails(notification, body); err != nil {
 			log.Error(err)
 		} else {
@@ -91,7 +94,19 @@ func handler(rw http.ResponseWriter, rq *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/issue", handler)
+
+	var endpoint string
+	var e bool
+
+	if endpoint, e = os.LookupEnv("ENDPOINT"); !e {
+		log.Warn("ENDPOINT variable not set. Default \"/issue\".")
+		endpoint = "issue"
+	}
+
+	log.Debug("ENDPOINT: " + endpoint)
+
+	http.HandleFunc("/"+endpoint, handler)
+
 	log.Fatal(
 		http.ListenAndServe(":8080", nil))
 }
