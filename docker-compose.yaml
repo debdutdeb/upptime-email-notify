@@ -1,0 +1,21 @@
+version: "3.3"
+
+services:
+    notification:
+        build:
+            dockerfile: Dockerfile
+            context: .
+        container_name: upptime_notification
+        environment:
+            - NOTIFICATION_EMAIL_SENDGRID
+            - NOTIFICATION_EMAIL_SENDGRID_API_KEY
+            - NOTIFICATION_EMAIL_FROM
+            - NOTIFICATION_EMAIL_TO
+            - GITHUB_SECRET
+            - VIRTUAL_HOST
+            - LETSENCRYPT_HOST
+        networks: [net]
+
+networks:
+    net:
+        external: true
