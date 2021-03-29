@@ -1,3 +1,5 @@
+***We are no longer using Upptime in production, therefore, there's no need to work on this project anymore. If I decide to fix the notification bug in the future, I'll do so in the [GitLab](https://gitlab.com/debdutdeb/upptime-email-notify) counterpart.***
+
 # upptime-email-notify
 
 Notify via emails using GitHub webhooks (since the built-in ones aren't working). 
